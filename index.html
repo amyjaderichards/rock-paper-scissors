@@ -10,17 +10,13 @@
 
 <body>
     <script>
-        //Computer choosing rock, paper or scissors
-        function computerPlay() {
-            let computerNum = Math.floor(Math.random() * 3) + 1;
+        userScore = 0;
+        computerScore = 0;
 
-            if (computerNum == 1) {
-                return ('rock');
-            } else if (computerNum == 2) {
-                return ('paper');
-            } else {
-                return ('scissors');
-            }
+        // Computer choosing rock, paper or scissors
+        function computerPlay() {
+            const choices = ['rock', 'paper', 'scissors'];
+            return choices[Math.floor(Math.random() * choices.length)]
         }
 
         function playRound(playerSelection, computerSelection) {
@@ -41,28 +37,38 @@
                     result = (playerSelection == 'rock') ? 1 : (playerSelection == 'scissors') ? 0 : -1;
                     break;
             }
-            if (result == -1) {
-                return -1;              //lose
-            } else if (result == 0) {
-                return 0;               //draw
-            } else return 1;            //win
+            return result;
         }
 
         function game() {
-            const playerSelection = 'Rock';
-            const computerSelection = computerPlay();
+            // Plays 5 rounds of rock-paper-scissors
+            for(let i =1; i<6; i++) {
+                // Prompt user for choice
+                let playerSelection = prompt('Please enter your choice: rock, paper or scissors: ');
+    
+                let computerSelection = computerPlay();
 
-            const resultnumber = playRound(playerSelection, computerSelection);
+                console.log('This is round ' + i + ': ')
 
-            if (resultnumber === 1) {
-                console.log("You lose!")
-            } else if (resultnumber == 0) {
-                console.log("It's a draw!");
-            } else {
-                console.log("You win!");
+                let roundResult = playRound(playerSelection, computerSelection);
+
+                if (roundResult==1) {
+                    console.log('You win this round!');
+                    userScore++;
+                } else if (roundResult==-1) {
+                    console.log('You lost this round!');
+                    computerScore++;
+                } else {
+                    console.log('You drew this round!');
+                }
             }
-        }
-        
+
+            if (userScore<computerScore) {
+                console.log('Computer wins with: ' + computerScore + ' points');
+            } else {
+                console.log('Congratulations, you win with ' + userScore + ' points');
+            }
+
         game();
 
     </script>
