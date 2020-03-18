@@ -2,27 +2,70 @@
 <html lang="en">
 
 <html>
-    <head>
-        <title>Rock-Paper-Scissors</title>
-        <meta charset="UTF-8"/>
-    </head>
 
-    <body>
-        <script>
-            function computerPlay() {
-                let computerNum = Math.floor(Math.random()*3)+1;
-                
-                if (computerNum == 1) {
-                    return 'Rock';
-                } else if (computerNum == 2) {
-                    return 'Paper';
-                } else {
-                    return 'Scissors';
-                }
+<head>
+    <title>Rock-Paper-Scissors</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+        //Computer choosing rock, paper or scissors
+        function computerPlay() {
+            let computerNum = Math.floor(Math.random() * 3) + 1;
+
+            if (computerNum == 1) {
+                return ('rock');
+            } else if (computerNum == 2) {
+                return ('paper');
+            } else {
+                return ('scissors');
             }
+        }
 
-            computerPlay();
-            
-        </script>
-    </body>
+        function playRound(playerSelection, computerSelection) {
+            // code here
+            let result = 0;
+            playerSelection = playerSelection.toLowerCase();
+
+            // switch statement using shorthand if statements
+            // 1 to win, 0 to draw, -1 to lose
+            switch (computerSelection) {
+                case 'rock':
+                    result = (playerSelection == 'paper') ? 1 : (playerSelection == 'rock') ? 0 : -1;
+                    break;
+                case 'paper':
+                    result = (playerSelection == 'scissors') ? 1 : (playerSelection == 'paper') ? 0 : -1;
+                    break;
+                case 'scissors':
+                    result = (playerSelection == 'rock') ? 1 : (playerSelection == 'scissors') ? 0 : -1;
+                    break;
+            }
+            if (result == -1) {
+                return -1;              //lose
+            } else if (result == 0) {
+                return 0;               //draw
+            } else return 1;            //win
+        }
+
+        function game() {
+            const playerSelection = 'Rock';
+            const computerSelection = computerPlay();
+
+            const resultnumber = playRound(playerSelection, computerSelection);
+
+            if (resultnumber === 1) {
+                console.log("You lose!")
+            } else if (resultnumber == 0) {
+                console.log("It's a draw!");
+            } else {
+                console.log("You win!");
+            }
+        }
+        
+        game();
+
+    </script>
+</body>
+
 </html>
